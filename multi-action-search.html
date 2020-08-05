@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+      <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+      <title>Multi-submit search form</title>
+      <link rel="STYLESHEET" type="text/css" href="style.css">
+</head>
+<body onload='hideResultDiv();'>
+
+<!-- code from:
+http://www.html-form-guide.com/blog/web-form/91/submit-form-multiple-scripts/
+-->
+<div id='formcontainer'>
+<!-- Form Code Start -->
+<form id='search' action='' method='get' onsubmit='javascript: return SubmitForm();'>
+<fieldset >
+<legend>Certificate</legend>
+
+<div class='container'>
+    <input type='text' name='q' id='q'  maxlength="250" placeholder="your ID" />
+    <input type='submit' name='Submit' value='submit' />
+</div>
+</fieldset>
+</form>
+<script type='text/javascript'>
+
+function SubmitForm()
+{
+    showResultDiv();
+    document.forms['search'].action='http://www.google.com/search';
+    document.forms['search'].target='frame_result1';
+    document.forms['search'].submit();
+
+    document.forms['search'].action='http://www.bing.com/search';
+    document.forms['search'].target='frame_result2';
+    document.forms['search'].submit();
+    return false;
+}
+
+function showResultDiv()
+{
+    var result_div = document.getElementById('resultcontainer');
+    result_div.style.display="";
+}
+
+function hideResultDiv()
+{
+    var result_div = document.getElementById('resultcontainer');
+    result_div.style.display='none';
+}
+
+
+</script>
+<!--
+Form Code End
+-->
+</div >
+
+<div id='resultcontainer'>
+<h1>Here are the results ...!</h1>
+<div class='iframe_container'>
+<iframe name='frame_result1' width='500px' height='600px' frameborder='0'></iframe>
+</div>
+<div class='iframe_container'>
+<iframe name='frame_result2' width='500px' height='600px' frameborder='0'></iframe>
+</div>
+
+</div>
+
+</body>
+</html>
